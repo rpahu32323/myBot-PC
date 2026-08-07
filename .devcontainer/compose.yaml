@@ -1,0 +1,22 @@
+
+# the services to start
+services:
+
+  # development container
+  mybot-pc:
+
+    # build from the local dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USERNAME=${USERNAME}
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+
+    # local maching mappings
+    volumes:
+      - ..:/workspace/myBot-PC
+
+    # command to keep the container running
+    command: sleep infinity

@@ -1,0 +1,30 @@
+
+{
+    "name": "myBot-PC",
+
+    "dockerComposeFile": "compose.yaml",
+    "service": "mybot-pc",
+
+    "initializeCommand": "echo \"USERNAME=$USER\nUSER_UID=$(id --user $USER)\nUSER_GID=$(id --group $USER)\n\" > .devcontainer/.env",
+
+    "workspaceFolder": "/workspace/myBot-PC",
+    
+    "customizations": {
+
+        "vscode": {
+            "extensions": [
+                "ms-python.autopep8",
+                "ms-python.python",
+                "tombi-toml.tombi"
+            ]
+        },
+
+        "vscodium": {
+            "extensions": {
+                "ms-python.autopep8": {},
+                "ms-python.python": {},
+                "tombi-toml.tombi": {}
+            }
+        }
+    }
+}
