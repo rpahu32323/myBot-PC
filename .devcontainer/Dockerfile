@@ -1,17 +1,27 @@
 
 # pull in the python docker image
-FROM python:3
+FROM python:3-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # update the container
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y \
+    # add additional packages
+    && apt-get install -y --no-install-recommends \
         build-essential \
         curl \
         git \
+        locales \
+    # update the loca
+    && sed -i '/en_US.UTF-8/s/^# //' /etc/locale.gen && locale-gen \
+    # clean up
     && apt-get autoremove --purge -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# set the local environmant variables
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 # add a non-root user based on os user
 #   catch the arguments
