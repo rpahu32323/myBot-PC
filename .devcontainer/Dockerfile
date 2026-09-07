@@ -3,6 +3,10 @@
 FROM python:3-slim
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# uv enviroment variables
+ENV UV_LINK_MODE=copy
+ENV UV_COMPILE_BYTECODE=1
+
 # update the container
 RUN apt-get update \
     && apt-get upgrade -y \
